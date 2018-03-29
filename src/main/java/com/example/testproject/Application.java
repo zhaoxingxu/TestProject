@@ -12,7 +12,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 @SpringBootApplication
 @Configuration
-@ImportResource(locations={"classpath:*/Spring.xml"})
+@ImportResource({"classpath*:*/Spring.xml"})
 @EnableCaching
 public class Application  extends SpringBootServletInitializer {
     public static void main(String[] args) {

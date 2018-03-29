@@ -2,6 +2,7 @@ package com.example.testproject.controller;
 
 import com.example.testproject.entity.InfUser;
 import com.example.testproject.service.InfoUserService;
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class TestController {
     }
     @RequestMapping(value = "/test",method = RequestMethod.POST, consumes = "application/json;charset=utf-8")
     public InfUser test2(@RequestBody String param){
-        logger.debug("======================>>:","/test");
+        logger.debug("======================>>:{},{}","/test",param);
         return infoUserService.getTestUserInfo(param);
     }
 }
