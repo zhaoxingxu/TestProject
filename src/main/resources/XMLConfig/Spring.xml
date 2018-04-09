@@ -5,11 +5,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:property-placeholder ignore-resource-not-found="true" ignore-unresolvable="false"
-                                  location="classpath*:properties/jdbc.properties"  system-properties-mode="ENVIRONMENT"/>
-
-
+                                  location="classpath*:properties/jdbc.properties,classpath*:properties/redis.properties,classpath*:properties/rabbitMQ.properties"  system-properties-mode="ENVIRONMENT"/>
+    <!--spring缓存配置-->
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="default"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
 
     <import resource="mybatis.xml"/>
+    <import resource="rabbitmq.xml"/>
+    <import resource="redis.xml"/>
 
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"
